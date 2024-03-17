@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const express = require("express");
+const { connectDb, disconnectDb } = require("./dbConnection");
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -11,6 +12,12 @@ app.get("/", (req, res) => {
     res.send("<h1>Welcome to backend</h1>");
 })
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT`, PORT);
+// database connection
+connectDb().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Connected to db and server is running on PORT`, PORT);
+    })
+}).catch((err) => {
+    console.log("db err ", err);
+    disconnectDb();
 })
