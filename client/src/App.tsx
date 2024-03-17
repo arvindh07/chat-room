@@ -1,7 +1,11 @@
+import Login from "./components/Login"
+
 function App() {
 
   return (
-    <><h1 className="text-red-500 text-lg">Hello world</h1></>
+    <div className="bg-slate-100 min-h-screen flex justify-center items-center">
+      <Login />
+    </div>
   )
 }
 
